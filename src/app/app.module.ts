@@ -2,9 +2,10 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
+import { SearchComponent } from "./Search/search.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SearchComponent],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent]
