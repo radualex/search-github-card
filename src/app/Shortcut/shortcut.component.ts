@@ -6,7 +6,7 @@ import { Component, Input } from "@angular/core";
   styleUrls: ["./shortcut.component.css"]
 })
 export class ShortcutComponent {
-  @Input() icon: String;
-  @Input() text: String;
-  @Input() color: String;
+  @Input() icon: string;
+  @Input() text: string;
+  @Input() color: string;
 }

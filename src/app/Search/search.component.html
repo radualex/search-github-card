@@ -6,9 +6,12 @@
   <hr class="separator" />
   <span class="title">TRENDING SHORTCUTS</span>
   <div class="trending-shortcuts--wrapper">
-    <shortcut [icon]="message" [text]="Messages" [color]="#F9EFFA"></shortcut>
-    <shortcut></shortcut>
-    <shortcut></shortcut>
+    <shortcut
+      *ngFor="let shortcut of shortcuts"
+      [icon]="shortcut.icon"
+      [text]="shortcut.text"
+      [color]="shortcut.color"
+    ></shortcut>
   </div>
   <span class="title">RECENT SEARCHES</span>
 </div>
