@@ -23,4 +23,6 @@ export class SearchComponent {
       color: "#F4F3FD"
     }
   ];
+
+  recentSearchItem = "exports";
 }
