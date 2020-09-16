@@ -25,4 +25,9 @@ export class SearchComponent {
   ];
 
   recentSearchItem = "exports";
+  recentSearchItems = [];
+
+  handleOnClick(ev: number) {
+    console.log(ev);
+  }
 }

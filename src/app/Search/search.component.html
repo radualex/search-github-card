@@ -15,8 +15,11 @@
   </div>
   <span class="title">RECENT SEARCHES</span>
   <div class="recent-searches--wrapper">
-    <recent-search-item [text]="recentSearchItem"></recent-search-item>
-    <recent-search-item [text]="recentSearchItem"></recent-search-item>
-    <recent-search-item [text]="recentSearchItem"></recent-search-item>
+    <recent-search-item
+      *ngFor="let rsi of recentSearchItems; index as i"
+      [index]="i"
+      [text]="rsi.text"
+      (closeClicked)="handleOnClick($event)"
+    ></recent-search-item>
   </div>
 </div>

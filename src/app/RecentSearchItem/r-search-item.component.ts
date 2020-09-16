@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   selector: "recent-search-item",
@@ -7,4 +7,10 @@ import { Component, Input } from "@angular/core";
 })
 export class RecentSearchItemComponent {
   @Input() text: string;
+  @Input() index: number;
+  @Output() closeClicked = new EventEmitter<number>();
+  
+  handleOnClick() {
+    this.closeClicked.emit(this.index);
+  };
 }
