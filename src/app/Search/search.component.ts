@@ -1,9 +1,13 @@
 import { Component } from "@angular/core";
+import { SearchService } from "../Services/search.service";
+import { Subject } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: "search-card",
   templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.css"]
+  styleUrls: ["./search.component.css"],
+  providers: [SearchService]
 })
 export class SearchComponent {
   shortcuts = [
@@ -24,10 +28,47 @@ export class SearchComponent {
     }
   ];
 
-  recentSearchItem = "exports";
+  searchTerm = new Subject<string>();
   recentSearchItems = [];
 
-  handleOnClick(ev: number) {
-    console.log(ev);
+  constructor(private searchService: SearchService) {
+    this.searchTerm.pipe(debounceTime(400)).subscribe((term: string) => {
+      this._setRecentSearchItem(term);
+    });
+
+    this.searchService.search(this.searchTerm).subscribe((results) => {
+      console.log(results);
+    });
+  }
+
+  _setRecentSearchItem(term: string) {
+    const length: number = this.recentSearchItems.length;
+    if (length !== 0) {
+      const lastItem = this.recentSearchItems[0];
+      const lastItemText: string = lastItem.text;
+      const termIsValid: boolean =
+        lastItemText.length > 1 &&
+        term.length > 1 &&
+        !lastItemText.includes(term) &&
+        !term.includes(lastItemText);
+      if (termIsValid) {
+        if (length === 3) {
+          this.recentSearchItems.shift();
+          this._pushItemToArray(term);
+        } else {
+          this._pushItemToArray(term);
+        }
+      }
+    } else {
+      this._pushItemToArray(term);
+    }
+  }
+
+  _pushItemToArray(term: string) {
+    this.recentSearchItems.push({ text: term });
+  }
+
+  handleOnClick(index: number) {
+    this.recentSearchItems.splice(index, 1);
   }
 }

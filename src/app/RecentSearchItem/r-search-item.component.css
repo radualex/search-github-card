@@ -1,7 +1,6 @@
 .container {
   display: flex;
   padding: 15px;
-  align-items: center;
 }
 
 .container:hover {
