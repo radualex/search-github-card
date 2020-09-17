@@ -1,13 +1,18 @@
 import { Injectable } from "@angular/core";
-// import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { debounceTime, switchMap, distinctUntilChanged } from "rxjs/operators";
+import {
+  debounceTime,
+  switchMap,
+  distinctUntilChanged,
+  map
+} from "rxjs/operators";
 
 @Injectable()
 export class SearchService {
-  baseUrl: string = "";
+  baseUrl: string = "https://api.github.com/search/repositories?q=";
 
-  // constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   search(terms: Observable<string>) {
     return terms.pipe(
@@ -18,9 +23,10 @@ export class SearchService {
   }
 
   searchEntries(term: string) {
-    return term;
-    // return this.http
-    //     .get(this.baseUrl + this.queryUrl + term)
-    //     .map(res => res.json());
+    return this.http.get(`${this.baseUrl}${term}`).pipe(
+      map((res: Response) => {
+        return res || {};
+      })
+    );
   }
 }

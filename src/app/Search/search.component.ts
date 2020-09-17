@@ -32,9 +32,9 @@ export class SearchComponent {
   recentSearchItems = [];
 
   constructor(private searchService: SearchService) {
-    this.searchTerm.pipe(debounceTime(400)).subscribe((term: string) => {
-      this._setRecentSearchItem(term);
-    });
+    // this.searchTerm.pipe(debounceTime(400)).subscribe((term: string) => {
+    //   this._setRecentSearchItem(term);
+    // });
 
     this.searchService.search(this.searchTerm).subscribe((results) => {
       console.log(results);
@@ -45,12 +45,7 @@ export class SearchComponent {
     const length: number = this.recentSearchItems.length;
     if (length !== 0) {
       const lastItem = this.recentSearchItems[0];
-      const lastItemText: string = lastItem.text;
-      const termIsValid: boolean =
-        lastItemText.length > 1 &&
-        term.length > 1 &&
-        !lastItemText.includes(term) &&
-        !term.includes(lastItemText);
+      const termIsValid: boolean = lastItem.text.length > 1 && term.length > 1;
       if (termIsValid) {
         if (length === 3) {
           this.recentSearchItems.shift();
