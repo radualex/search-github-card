@@ -30,6 +30,7 @@ export class SearchComponent {
 
   searchTerm = new Subject<string>();
   recentSearchItems = [];
+  githubRepos = [];
 
   constructor(private searchService: SearchService) {
     // this.searchTerm.pipe(debounceTime(400)).subscribe((term: string) => {
@@ -37,7 +38,7 @@ export class SearchComponent {
     // });
 
     this.searchService.search(this.searchTerm).subscribe((results) => {
-      console.log(results);
+      this.githubRepos = results;
     });
   }
 
