@@ -11,7 +11,9 @@ import {
 
 import { GithubRepo } from "../../models/githubRepo.dto";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class SearchService {
   baseUrl: string = "https://api.github.com/search/repositories?q=";
 
