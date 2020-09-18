@@ -6,7 +6,8 @@ import { GithubRepo } from "src/models/githubRepo.dto";
 @Component({
   selector: "search-card",
   templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.css"]
+  styleUrls: ["./search.component.css"],
+  providers: [SearchService]
 })
 export class SearchComponent {
   shortcuts = [
