@@ -7,6 +7,7 @@ import { SearchComponent } from "./Search/search.component";
 import { ShortcutComponent } from "./Shortcut/shortcut.component";
 import { RecentSearchItemComponent } from "./RecentSearchItem/r-search-item.component";
 import { OverlayComponent } from "./Overlay/overlay.component";
+import { SearchService } from "./Services/search.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { OverlayComponent } from "./Overlay/overlay.component";
     OverlayComponent
   ],
   imports: [BrowserModule, HttpClientModule],
-  providers: [HttpClient],
+  providers: [HttpClient, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
