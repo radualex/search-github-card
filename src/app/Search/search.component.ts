@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { SearchService } from "../Services/search.service";
 import { Subject } from "rxjs";
-import { debounceTime } from "rxjs/operators";
+import { GithubRepo } from "src/models/githubRepo.dto";
 
 @Component({
   selector: "search-card",
@@ -30,13 +30,9 @@ export class SearchComponent {
 
   searchTerm = new Subject<string>();
   recentSearchItems = [];
-  githubRepos = [];
+  githubRepos: GithubRepo[] = [];
 
   constructor(private searchService: SearchService) {
-    // this.searchTerm.pipe(debounceTime(400)).subscribe((term: string) => {
-    //   this._setRecentSearchItem(term);
-    // });
-
     this.searchService.search(this.searchTerm).subscribe((results) => {
       this.githubRepos = results;
     });
@@ -64,7 +60,17 @@ export class SearchComponent {
     this.recentSearchItems.push({ text: term });
   }
 
+  handleOnSearch(ev: KeyboardEvent) {
+    let target = ev.target as HTMLInputElement;
+    this.searchTerm.next(target.value);
+  }
+
   handleOnClick(index: number) {
     this.recentSearchItems.splice(index, 1);
+  }
+
+  handleOnClickSearch(item: string) {
+    this.githubRepos = [];
+    this._setRecentSearchItem(item);
   }
 }

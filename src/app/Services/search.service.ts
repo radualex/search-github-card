@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import {
   debounceTime,
   switchMap,
   distinctUntilChanged,
-  map
+  map,
+  catchError
 } from "rxjs/operators";
 
 import { GithubRepo } from "../../models/githubRepo.dto";
@@ -20,13 +21,14 @@ export class SearchService {
     return terms.pipe(
       debounceTime(400),
       distinctUntilChanged(),
-      switchMap((term: string) =>
-        term !== "" ? this.searchEntries(term) : new Observable()
-      )
+      switchMap((term: string) => this.searchEntries(term))
     );
   }
 
   searchEntries(term: string): Observable<GithubRepo[]> {
+    if (term === "") {
+      return this._emptyObersable();
+    }
     return this.http
       .get<GithubRepo[]>(`${this.baseUrl}${term}&per_page=10`)
       .pipe(
@@ -34,7 +36,14 @@ export class SearchService {
           return res.items.map((item: any) => {
             return new GithubRepo(item.name, item.owner.login);
           });
+        }),
+        catchError(() => {
+          return this._emptyObersable();
         })
       );
+  }
+
+  _emptyObersable(): Observable<GithubRepo[]> {
+    return of<GithubRepo[]>([]);
   }
 }

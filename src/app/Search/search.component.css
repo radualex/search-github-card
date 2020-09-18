@@ -26,7 +26,11 @@
   opacity: 0.6;
 }
 
-.container .search-bar--wrapper input {
+.container .search-bar--wrapper #search {
+  width: 100%;
+}
+
+.container .search-bar--wrapper #search input {
   outline: none;
   border: none;
   width: 100%;
@@ -39,7 +43,7 @@
   color: #202842;
 }
 
-.container .search-bar--wrapper input::placeholder {
+.container .search-bar--wrapper #search input::placeholder {
   mix-blend-mode: normal;
   opacity: 0.6;
 }

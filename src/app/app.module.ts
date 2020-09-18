@@ -6,13 +6,15 @@ import { AppComponent } from "./app.component";
 import { SearchComponent } from "./Search/search.component";
 import { ShortcutComponent } from "./Shortcut/shortcut.component";
 import { RecentSearchItemComponent } from "./RecentSearchItem/r-search-item.component";
+import { OverlayComponent } from "./Overlay/overlay.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     ShortcutComponent,
-    RecentSearchItemComponent
+    RecentSearchItemComponent,
+    OverlayComponent
   ],
   imports: [BrowserModule, HttpClientModule],
   providers: [],
