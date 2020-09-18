@@ -10,6 +10,7 @@
       "prefix": "app",
       "styles": ["styles.css"],
       "scripts": [],
+      "tsconfig": "../tsconfig.json",
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
