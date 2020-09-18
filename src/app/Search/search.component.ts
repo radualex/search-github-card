@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { SearchService } from "../Services/search.service";
+import { SearchService } from "../../app/Services/search.service";
 import { Subject } from "rxjs";
 import { GithubRepo } from "src/models/githubRepo.dto";
 
@@ -7,7 +7,6 @@ import { GithubRepo } from "src/models/githubRepo.dto";
   selector: "search-card",
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.css"],
-  providers: [SearchService]
 })
 export class SearchComponent {
   shortcuts = [
